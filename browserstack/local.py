@@ -48,10 +48,11 @@ class Local:
     if "onlyCommand" in kwargs and kwargs["onlyCommand"]:
       return
 
+    os.system('echo "" > "'+ self.local_logfile_path +'"')
+
     self.proc = subprocess.Popen(self._generate_cmd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (out, err) = self.proc.communicate()
 
-    os.system('echo "" > "'+ self.local_logfile_path +'"')
     try:
       if out:
         data = json.loads(out.decode())
